@@ -1,7 +1,14 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: iperf3
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: iperf3-server-deployment
+  namespace: iperf3
   labels:
     app: iperf3-server
 spec:
@@ -42,6 +49,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: iperf3
   name: iperf3-server
 spec:
   selector:
@@ -56,6 +64,7 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
+  namespace: iperf3
   name: iperf3-clients
   labels:
     app: iperf3-client
